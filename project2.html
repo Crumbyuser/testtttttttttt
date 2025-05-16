@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Two - Damien's Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-details-container {
+            max-width: 900px;
+            margin: 100px auto 40px auto;
+            background: var(--darker-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 40px;
+            color: var(--text-color);
+        }
+        .project-details-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        .project-details-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: block;
+        }
+        .project-details-info {
+            margin-bottom: 30px;
+        }
+        .project-details-info .detail-item {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="project-details-container">
+        <h1 class="project-details-title">Project Two</h1>
+        <img src="assets/project2-thumbnail.jpg" alt="Project 2" class="project-details-image">
+        <div class="project-details-info">
+            <div class="detail-item"><i class="fas fa-code"></i> Technologies: React, Node.js, MongoDB</div>
+            <div class="detail-item"><i class="fas fa-calendar"></i> Duration: 4 months</div>
+            <div class="detail-item"><i class="fas fa-tasks"></i> Role: Frontend Developer</div>
+        </div>
+        <p>Description of the second project. Highlight the key aspects and achievements. The layout provides more space for showcasing project details and technologies used.</p>
+        <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+</body>
+</html> 

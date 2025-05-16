@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Damien's Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Damien's Portfolio.</a>
+            <div class="nav-links">
+                <a href="index.html" class="active">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Hello, I'm Damien</h1>
+                <h2>I'm a <span class="typed-text"></span></h2>
+                <p>I create responsive websites with modern technologies and best practices. With a passion for clean code and user experience.</p>
+                <p>I'm a passionate and dedicated frontend developer with a keen eye for detail and a commitment to creating user-friendly, efficient, and visually appealing web experiences.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61575933662969" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://github.com" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+                
+                <div class="cta-buttons">
+                    <a href="assets/CV.pdf" download class="btn">Download CV</a>
+                    <a href="portfolio.html" class="btn btn-outline">View My Work</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hexagon-border"></div>
+                <img src="assets/Profile.jpg" alt="Profile Image">
+            </div>
+        </div>
+    </section>
+    <!-- Typed.js for animated text -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        var typed = new Typed('.typed-text', {
+            strings: ['Frontend Developer', 'Web Designer', 'UI/UX Designer', 'Software Engineer', 'Backend Developer'],
+            typeSpeed: 100,
+            backSpeed: 60,
+            loop: true
+        });
+    </script>
+</body>
+</html> 

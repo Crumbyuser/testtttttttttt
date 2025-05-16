@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damien's Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Damien's Portfolio.</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html" class="active">Services</a>
+                <a href="portfolio.html">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our <span>Services</span></h2>
+            </div>
+            <div class="services-description">
+                <p>I believe that the best way to learn and improve is through practical experience. By offering these services, I'm not just providing value to clients, but also creating opportunities for myself to:</p>
+                <ul>
+                    <li>Apply theoretical knowledge to real-world projects</li>
+                    <li>Learn from client requirements and feedback</li>
+                    <li>Stay updated with industry best practices</li>
+                    <li>Develop problem-solving skills through diverse challenges</li>
+                    <li>Build a portfolio of meaningful work</li>
+                </ul>
+                <p>Each project is a learning opportunity, and I'm committed to delivering quality results while continuously expanding my expertise.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-code"></i>
+                    <h3>Web Development</h3>
+                    <p>Custom website development tailored to your needs. From simple landing pages to complex web applications, I create responsive and user-friendly solutions.</p>
+                    <button class="btn order-btn" data-service="web">Order Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order Form Modal -->
+    <div class="modal" id="orderModal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Order <span id="serviceName">Service</span></h2>
+            <form id="orderForm" class="order-form" action="https://formsubmit.co/Damiencresswell@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Website Order">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_next" value="https://crumbyuser.github.io/Portfolio-website/services.html">
+                <input type="hidden" name="_captcha" value="false">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="projectType">Project Type</label>
+                    <select id="projectType" name="projectType" required>
+                        <option value="">Select Project Type</option>
+                        <option value="landing">Landing Page</option>
+                        <option value="business">Business Website</option>
+                        <option value="webapp">Web Application</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Select Features</label>
+                    <div class="features-grid">
+                        <div class="feature-option">
+                            <input type="checkbox" id="video" name="features" value="video">
+                            <label for="video">Video Embedding</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="animations" name="features" value="animations">
+                            <label for="animations">Basic Animations</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="gallery" name="features" value="gallery">
+                            <label for="gallery">Image Gallery</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="forms" name="features" value="forms">
+                            <label for="forms">Contact Forms</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="maps" name="features" value="maps">
+                            <label for="maps">Google Maps Integration</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="social" name="features" value="social">
+                            <label for="social">Social Media Links</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="slider" name="features" value="slider">
+                            <label for="slider">Image Slider</label>
+                        </div>
+                        <div class="feature-option">
+                            <input type="checkbox" id="newsletter" name="features" value="newsletter">
+                            <label for="newsletter">Newsletter Signup</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="timeline">Preferred Timeline</label>
+                    <select id="timeline" name="timeline" required>
+                        <option value="">Select Timeline</option>
+                        <option value="1month">1 Month</option>
+                        <option value="2months">2 Months</option>
+                        <option value="3months">3 Months</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="description">Project Description</label>
+                    <textarea id="description" name="description" rows="4" required></textarea>
+                </div>
+                <div class="price-summary">
+                    <h3>Estimated Price: <span id="totalPrice">£0</span></h3>
+                    <p class="price-note">* Final price may vary based on project complexity</p>
+                </div>
+                <button type="submit" class="btn submit-btn">Submit Order</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Price calculation
+        const featurePrices = {
+            video: 5,
+            animations: 8,
+            gallery: 6,
+            forms: 4,
+            maps: 3,
+            social: 3,
+            slider: 7,
+            newsletter: 5
+        };
+
+        const basePrices = {
+            landing: 25,
+            business: 50,
+            webapp: 55,
+            other: 0,
+        };
+
+        // Timeline discounts
+        const timelineDiscounts = {
+            '1month': 0,    // No discount for 1 month
+            '2months': 0.1, // 10% discount for 2 months
+            '3months': 0.2, // 20% discount for 3 months
+            'flexible': 0.3 // 30% discount for flexible timeline
+        };
+
+        function calculateTotal() {
+            let total = 0;
+            const projectType = document.getElementById('projectType').value;
+            const timeline = document.getElementById('timeline').value;
+            
+            // Add base price
+            if (projectType) {
+                total += basePrices[projectType];
+            }
+
+            // Add feature prices
+            document.querySelectorAll('input[name="features"]:checked').forEach(feature => {
+                total += featurePrices[feature.value];
+            });
+
+            // Apply timeline discount
+            if (timeline && timeline !== '1month') {
+                const discount = timelineDiscounts[timeline];
+                total = total * (1 - discount);
+            }
+
+            // Update total price display
+            document.getElementById('totalPrice').textContent = `£${total.toFixed(2)}`;
+        }
+
+        // Add event listeners for price calculation
+        document.getElementById('projectType').addEventListener('change', calculateTotal);
+        document.getElementById('timeline').addEventListener('change', calculateTotal);
+        document.querySelectorAll('input[name="features"]').forEach(checkbox => {
+            checkbox.addEventListener('change', calculateTotal);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('orderModal');
+        const orderButtons = document.querySelectorAll('.order-btn');
+        const closeModal = document.querySelector('.close-modal');
+        const serviceName = document.getElementById('serviceName');
+        const orderForm = document.getElementById('orderForm');
+
+        orderButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const service = button.getAttribute('data-service');
+                let serviceTitle = '';
+                
+                switch(service) {
+                    case 'web':
+                        serviceTitle = 'Web Development';
+                        break;
+                }
+                
+                serviceName.textContent = serviceTitle;
+                modal.style.display = 'block';
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get all selected features
+            const selectedFeatures = Array.from(document.querySelectorAll('input[name="features"]:checked'))
+                .map(checkbox => checkbox.nextElementSibling.textContent)
+                .join(', ');
+            
+            // Add selected features to form data
+            const featuresInput = document.createElement('input');
+            featuresInput.type = 'hidden';
+            featuresInput.name = 'Selected Features';
+            featuresInput.value = selectedFeatures;
+            orderForm.appendChild(featuresInput);
+            
+            // Add total price to form data
+            const priceInput = document.createElement('input');
+            priceInput.type = 'hidden';
+            priceInput.name = 'Total Price';
+            priceInput.value = document.getElementById('totalPrice').textContent;
+            orderForm.appendChild(priceInput);
+            
+            // Show success message
+            alert('Thank you for your order! I will contact you shortly to discuss your project.');
+            
+            // Submit the form
+            orderForm.submit();
+            
+            // Reset form and close modal
+            modal.style.display = 'none';
+            orderForm.reset();
+            calculateTotal();
+        });
+    </script>
+</body>
+</html> 

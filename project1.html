@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project One - Damien's Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .project-details-container {
+            max-width: 900px;
+            margin: 100px auto 40px auto;
+            background: var(--darker-bg);
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            padding: 40px;
+            color: var(--text-color);
+        }
+        .project-details-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        .project-details-image {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+            display: block;
+        }
+        .project-details-info {
+            margin-bottom: 30px;
+        }
+        .project-details-info .detail-item {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        /* Lightbox styles */
+        #lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.85);
+            align-items: center;
+            justify-content: center;
+        }
+        #lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            font-size: 2.5rem;
+            color: #fff;
+            cursor: pointer;
+            z-index: 10001;
+        }
+        #lightbox-img {
+            max-width: 90vw;
+            max-height: 80vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+        }
+    </style>
+</head>
+<body>
+    <div class="project-details-container">
+        <h1 class="project-details-title">Website/AI Creation and AI Integration</h1>
+        <img src="assets/project_1_logo.png" alt="Medical AI Website Logo" class="project-details-image" style="max-width:140px;display:block;margin:0 auto 30px auto;object-fit:contain;">
+        <div class="project-details-info">
+            <div class="detail-item"><i class="fas fa-code"></i> Technologies: HTML, CSS, JavaScript</div>
+            <div class="detail-item"><i class="fas fa-calendar"></i> Duration: 3 months</div>
+            <div class="detail-item"><i class="fas fa-tasks"></i> Role: Full Stack Developer</div>
+        </div>
+        <a href="https://github.com/Crumbyuser" class="github-link" target="_blank" style="margin-bottom:24px;display:inline-flex;align-items:center;gap:8px;font-size:1.1rem;"><i class="fab fa-github"></i> View on GitHub</a>
+        <p>
+            This project is a modern, responsive medical website designed to demonstrate the integration of advanced AI chatbot technology for providing medical advice. The site features four distinct versions: two powered by Gemini and two by OpenAI, each offering unique conversational experiences. Users can interact with the AI chatbot to receive medical guidance, explore a clean and professional interface, and navigate through user dashboards tailored for both Gemini and OpenAI implementations. The project showcases expertise in web development, user experience design, and the practical application of AI in healthcare.
+        </p>
+        <!-- Screenshots Section -->
+        <div class="screenshots-section" style="margin-top:40px;">
+            <h3 style="color:var(--primary-color);margin-bottom:18px;">Project Screenshots</h3>
+            <div class="screenshots-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:30px;justify-items:center;">
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(1).png" alt="NHS Telemedicine Platform - Gemini Version Homepage" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Homepage</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(2).png" alt="NHS Telemedicine Platform - OpenAI Version Homepage" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Medical Area</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(3).png" alt="NHS Telemedicine Platform - Gemini User Dashboard" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: AI Gateway</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(4).png" alt="NHS Telemedicine Platform - OpenAI User Dashboard" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: AI Chat menu</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(5).png" alt="NHS Telemedicine Platform - Feature 1" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Gemini V1</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(6).png" alt="NHS Telemedicine Platform - Feature 2" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Gemini V2</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(7).png" alt="NHS Telemedicine Platform - Feature 3" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Open AI V1</p>
+                </div>
+                <div class="screenshot-item">
+                    <img src="assets/NHS_Telemedicine_Platform(8).png" alt="NHS Telemedicine Platform - Feature 4" style="max-width:100%;border-radius:8px;margin-bottom:10px;">
+                    <p>NHS Telemedicine Platform: Open AI V2</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Lightbox Modal -->
+        <div id="lightbox-modal" style="display:none;position:fixed;z-index:9999;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.85);align-items:center;justify-content:center;">
+            <span id="lightbox-close" style="position:absolute;top:30px;right:50px;font-size:2.5rem;color:#fff;cursor:pointer;z-index:10001;">&times;</span>
+            <img id="lightbox-img" src="" alt="Screenshot" style="max-width:90vw;max-height:80vh;border-radius:12px;box-shadow:0 4px 32px rgba(0,0,0,0.4);">
+        </div>
+        <script>
+        // Lightbox functionality
+        document.querySelectorAll('.screenshot-item img').forEach(img => {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function() {
+                document.getElementById('lightbox-img').src = this.src;
+                document.getElementById('lightbox-modal').style.display = 'flex';
+            });
+        });
+        document.getElementById('lightbox-close').onclick = function() {
+            document.getElementById('lightbox-modal').style.display = 'none';
+        };
+        document.getElementById('lightbox-modal').onclick = function(e) {
+            if (e.target === this) this.style.display = 'none';
+        };
+        </script>
+        <a href="portfolio.html" class="back-link"><i class="fas fa-arrow-left"></i> Back to Portfolio</a>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Damien's Portfolio</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+
+    <script>
+        // Search and filter functionality
+        const searchInput = document.getElementById('searchInput');
+        const tagButtons = document.querySelectorAll('.tag-btn');
+        const projectCards = document.querySelectorAll('.project-card');
+        const sortSelect = document.getElementById('sortSelect');
+        const projectCategories = document.querySelectorAll('.portfolio-category');
+        const portfolioGrid = document.querySelector('.portfolio-grid .container');
+
+        // Add data-tag attributes to project cards
+        document.querySelectorAll('.portfolio-category').forEach(category => {
+            const categoryName = category.querySelector('h2').textContent.toLowerCase();
+            const projects = category.querySelectorAll('.project-card');
+            projects.forEach(project => {
+                if (categoryName.includes('web')) {
+                    project.setAttribute('data-tag', 'web');
+                } else if (categoryName.includes('ai')) {
+                    project.setAttribute('data-tag', 'ai');
+                } else if (categoryName.includes('future')) {
+                    project.setAttribute('data-tag', 'future');
+                }
+            });
+        });
+
+        // Function to update category titles visibility
+        function updateCategoryTitles(searchOrTag) {
+            projectCategories.forEach(category => {
+                const categoryTitle = category.querySelector('h2');
+                const projects = category.querySelectorAll('.project-card');
+                let hasVisibleProjects = false;
+
+                // Check if any projects in this category are visible
+                projects.forEach(project => {
+                    if (project.style.display !== 'none') {
+                        hasVisibleProjects = true;
+                    }
+                });
+
+                // Show/hide category title based on visible projects
+                if (hasVisibleProjects) {
+                    categoryTitle.style.display = 'block';
+                } else {
+                    categoryTitle.style.display = 'none';
+                }
+            });
+        }
+
+        // Tag filter functionality
+        tagButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                tagButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                filterProjects();
+                updateCategoryTitles();
+                reorderCategories(button.getAttribute('data-tag'));
+            });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', () => {
+            filterProjects();
+            updateCategoryTitles();
+            reorderCategories(searchInput.value.toLowerCase());
+        });
+
+        // Function to reorder categories
+        function reorderCategories(searchTerm) {
+            const categories = Array.from(projectCategories);
+            
+            if (searchTerm === '') {
+                // Reset to original order
+                categories.sort((a, b) => {
+                    const aName = a.querySelector('h2').textContent.toLowerCase();
+                    const bName = b.querySelector('h2').textContent.toLowerCase();
+                    if (aName.includes('web')) return -1;
+                    if (bName.includes('web')) return 1;
+                    if (aName.includes('ai')) return -1;
+                    if (bName.includes('ai')) return 1;
+                    return 0;
+                });
+            } else {
+                // Move categories with matching projects to top
+                categories.sort((a, b) => {
+                    const aProjects = a.querySelectorAll('.project-card');
+                    const bProjects = b.querySelectorAll('.project-card');
+                    let aHasMatch = false;
+                    let bHasMatch = false;
+
+                    aProjects.forEach(project => {
+                        const projectName = project.getAttribute('data-name').toLowerCase();
+                        const projectDescription = project.querySelector('.project-info p').textContent.toLowerCase();
+                        if (projectName.includes(searchTerm) || projectDescription.includes(searchTerm)) {
+                            aHasMatch = true;
+                        }
+                    });
+
+                    bProjects.forEach(project => {
+                        const projectName = project.getAttribute('data-name').toLowerCase();
+                        const projectDescription = project.querySelector('.project-info p').textContent.toLowerCase();
+                        if (projectName.includes(searchTerm) || projectDescription.includes(searchTerm)) {
+                            bHasMatch = true;
+                        }
+                    });
+
+                    if (aHasMatch && !bHasMatch) return -1;
+                    if (!aHasMatch && bHasMatch) return 1;
+                    return 0;
+                });
+            }
+
+            // Re-append categories in new order
+            categories.forEach(category => {
+                portfolioGrid.appendChild(category);
+            });
+        }
+
+        // Combined filter function
+        function filterProjects() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const activeTag = document.querySelector('.tag-btn.active').getAttribute('data-tag');
+
+            projectCards.forEach(card => {
+                const cardText = card.textContent.toLowerCase();
+                const cardTag = card.getAttribute('data-tag');
+                const matchesSearch = cardText.includes(searchTerm);
+                const matchesTag = activeTag === 'all' || cardTag === activeTag;
+
+                if (matchesSearch && matchesTag) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Existing sorting functionality
+        sortSelect.addEventListener('change', () => {
+            const sortValue = sortSelect.value;
+            
+            projectCategories.forEach(category => {
+                const projects = category.querySelector('.projects');
+                const cards = Array.from(category.querySelectorAll('.project-card'));
+                
+                cards.sort((a, b) => {
+                    if (sortValue === 'date-desc' || sortValue === 'date-asc') {
+                        const dateA = new Date(a.getAttribute('data-date'));
+                        const dateB = new Date(b.getAttribute('data-date'));
+                        return sortValue === 'date-desc' ? dateB - dateA : dateA - dateB;
+                    } else {
+                        const nameA = a.getAttribute('data-name').toLowerCase();
+                        const nameB = b.getAttribute('data-name').toLowerCase();
+                        return sortValue === 'name-asc' ? 
+                            nameA.localeCompare(nameB) : 
+                            nameB.localeCompare(nameA);
+                    }
+                });
+                
+                // Clear and re-append sorted cards
+                projects.innerHTML = '';
+                cards.forEach(card => projects.appendChild(card));
+            });
+        });
+
+        // Initialize with 'All' tag active
+        document.querySelector('.tag-btn[data-tag="all"]').classList.add('active');
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-content">
+            <a href="index.html" class="logo">Damien's Portfolio.</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="about.html">About</a>
+                <a href="services.html">Services</a>
+                <a href="portfolio.html" class="active">Portfolio</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Portfolio Intro Section -->
+    <div class="container" style="margin-top: 140px; margin-bottom: 40px;">
+        <h1 class="section-title" style="text-align:center; margin-bottom: 18px; color: #fff;">My <span style="color: var(--primary-color);">Portfolio</span></h1>
+        <p style="text-align:center; color: #a0a0a0; font-size: 1.15rem; max-width: 700px; margin: 0 auto;">
+            Welcome to my portfolio! Here you can explore a selection of my featured projects, showcasing my skills in web development, design, and technology. Click on any project to learn more about the work, technologies used, and my role in each project.
+        </p>
+    </div>
+    <!-- Portfolio Projects Section -->
+    <section class="portfolio-grid" style="margin-top: 40px;">
+        <div class="container">
+            <div class="portfolio-category">
+                <h2>Featured Projects</h2>
+                <div class="projects">
+                    <div class="project-card" data-name="Project One" data-date="2023-01-01" data-tag="web" style="display: flex; flex-direction: row; align-items: center; justify-content: space-between;">
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="project-header">
+                                <h3>Website/AI Creation and AI Integration</h3>
+                            </div>
+                            <div class="project-info">
+                                <p>A website created in the style of a medical website to integrate an AI chatbot that can give medical advice. There are four versions: two using Gemini and two using OpenAI.</p>
+                            </div>
+                            <div class="tech-stack">
+                                <span>HTML</span><span>CSS</span><span>JavaScript</span>
+                            </div>
+                            <div class="project-footer">
+                                <div class="project-links">
+                                    <a href="project1.html" class="live-link" style="text-decoration:none;">View Project</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="flex-shrink: 0; margin-left: 32px; display: flex; align-items: center; justify-content: center; height: 100%;">
+                            <img src="assets/project_1_logo.png" alt="Medical AI Website Logo" style="max-width: 140px; height: auto; border-radius: 12px; object-fit: contain; box-shadow: 0 2px 8px rgba(0,0,0,0.08);">
+                        </div>
+                    </div>
+                    <a href="project2.html" class="project-card" data-name="Project Two" data-date="2023-02-01" data-tag="web">
+                        <div class="project-header">
+                            <h3>Project Two</h3>
+                        </div>
+                        <div class="project-info">
+                            <p>Description of the second project. Highlight the key aspects and achievements.</p>
+                        </div>
+                        <div class="tech-stack">
+                            <span>React</span><span>Node.js</span><span>MongoDB</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-links">
+                                <span class="live-link">View Project</span>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="project3.html" class="project-card" data-name="Project Three" data-date="2023-03-01" data-tag="ai">
+                        <div class="project-header">
+                            <h3>Project Three</h3>
+                        </div>
+                        <div class="project-info">
+                            <p>Overview of the third project. Mention the challenges overcome and results achieved.</p>
+                        </div>
+                        <div class="tech-stack">
+                            <span>Python</span><span>Django</span><span>PostgreSQL</span>
+                        </div>
+                        <div class="project-footer">
+                            <div class="project-links">
+                                <span class="live-link">View Project</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Portfolio Projects Section -->
+</body>
+</html>
